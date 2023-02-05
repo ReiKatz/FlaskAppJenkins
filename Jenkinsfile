@@ -8,7 +8,7 @@ pipeline {
         }        
         stage('Clone Git repository') {
             steps {
-                git 'https://github.com/yourusername/yourflaskapp.git'
+                git 'https://github.com/ReiKatz/FlaskAppJenkins.git'
             }
         }
         stage('Install dependencies') {
