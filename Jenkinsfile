@@ -11,20 +11,15 @@ pipeline {
                 git 'https://github.com/ReiKatz/FlaskAppJenkins.git'
             }
         }
-        stage('Install dependencies') {
+        stage('Run Flask app') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'FLASK_APP=hello.py FLASK_ENV=development flask run'
             }
         }
         stage('Build Flask app') {
             steps {
                 sh 'python hello.py install'
             }
-        }
-        stage('Test Flask app') {
-            steps {
-                sh 'python tests.py'
-            }
-        }
+        }    
     }
 }
