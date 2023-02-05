@@ -5,6 +5,26 @@ pipeline {
             steps {
                 sh 'python --version'
             }
+        }        
+        stage('Clone Git repository') {
+            steps {
+                git 'https://github.com/yourusername/yourflaskapp.git'
+            }
+        }
+        stage('Install dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Build Flask app') {
+            steps {
+                sh 'python hello.py install'
+            }
+        }
+        stage('Test Flask app') {
+            steps {
+                sh 'python tests.py'
+            }
         }
     }
 }
