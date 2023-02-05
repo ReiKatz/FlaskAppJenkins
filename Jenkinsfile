@@ -6,10 +6,11 @@ pipeline {
                 sh 'python --version'
             }
         }
-        stage('Build Flask app') {
+        stage('Build') {
             steps {
-                sh 'python hello.py install'
+                // Get some code from a GitHub repository
+                git url: 'https://github.com/ReiKatz/FlaskAppJenkins.git', branch: 'main'
             }
-        }    
+        }
     }
 }
