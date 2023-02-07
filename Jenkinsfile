@@ -10,7 +10,8 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    dockerImage = docker.build 
+                    def image = "abc"
+                    sh "docker build -t '${image}' ."
                 }
             }
         }
