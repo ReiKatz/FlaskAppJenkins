@@ -15,8 +15,8 @@ pipeline {
                 script {
                     def registry = "reikatz/app"
                     sh "docker login -u reikatz -p Aa123456123456"
-                    sh "docker tag '${image}':$BUILD_NUMBER reikatz/'${image}':$BUILD_NUMBER"
-                    sh "docker push reikatz/'${image}':$BUILD_NUMBER"
+                    sh "docker tag abc:$BUILD_NUMBER reikatz/abc:$BUILD_NUMBER"
+                    sh "docker push reikatz/abc:$BUILD_NUMBER"
                 }
             }
         }    
