@@ -3,6 +3,7 @@ pipeline {
     
     environment {
         registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkins_repo"
+        repository = "jenkins-repo"
     }
     stages {
         stage('python versio') {
@@ -18,7 +19,7 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    dockerImage = docker.build registry
+                    sh 'docker build -t $registry/$repository:$BUILD_NUMBER .'
                 }
             }
         }
