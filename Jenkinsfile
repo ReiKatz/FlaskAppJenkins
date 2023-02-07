@@ -1,9 +1,6 @@
 pipeline {
     agent any
     
-    environment {
-        registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask"
-    }
     stages {
         stage('Cloning Git') {
             steps {
@@ -13,19 +10,19 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    dockerImage = docker.build registry
+                    dockerImage = docker.build 
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                script{
-                        docker.withRegistry('https://639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask', 'ecr:eu-west-1:aws-credentials') {
-                    dockerImage.push("${env.BUILD_NUMBER}")
-                    dockerImage.push("latest")
-                }
-            }
-        }    
-    }        
+        //stage('Deploy') {
+            //steps {
+                //script{
+                        //docker.withRegistry('https://639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask', 'ecr:eu-west-1:aws-credentials') {
+                    //dockerImage.push("${env.BUILD_NUMBER}")
+                    //dockerImage.push("latest")
+                //}
+            //}
+        //}    
+    //}        
 }
 }
