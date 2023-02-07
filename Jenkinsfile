@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
-                        docker.withRegistry('https://639771291841.dkr.ecr.eu-west-1.amazonaws.com', 'ecr:eu-west-1:aws-credentials') {
+                        docker.withRegistry('https://639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask', 'ecr:eu-west-1:aws-credentials') {
                     dockerImage.push("${env.BUILD_NUMBER}")
                     dockerImage.push("latest")
                 }
