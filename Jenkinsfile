@@ -1,34 +1,21 @@
 pipeline {
     agent any
     
+    environment {
+        registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkins_repo"
+    }
     stages {
         stage('python version') {
             steps {
                 sh 'python --version'
             }
         }
-        stage('Build') {
-            steps {
-                // Get some code from a GitHub repository
-                git url: 'https://github.com/ReiKatz/FlaskAppJenkins.git', branch: 'main'
-            }
-        }
-        stage("Build Docker Image") {
-            steps {
+        stage('Building image') {
+            steps{
                 script {
-                    def image = docker.build("image-name:tag", ".")
+                    dockerImage = docker.build registry
                 }
             }
         }
-
-        stage("Push Docker Image") {
-            steps {
-                script {
-                    docker.withRegistry("https://registry-url", "docker-registry") {
-                        image.push("latest")
-                    }
-                }
-            }
-        }    
-    }
+    }        
 }
