@@ -5,7 +5,7 @@ pipeline {
         registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkins_repo"
     }
     stages {
-        stage('python version') {
+        stage('python versio') {
             steps {
                 sh 'python --version'
             }
