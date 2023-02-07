@@ -3,9 +3,6 @@ pipeline {
     
     environment {
         registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask"
-        AWS_REGION
-        AWS_ACCESS_KEY_ID
-        AWS_SECRET_ACCESS_KEY
     }
     stages {
         stage('Cloning Git') {
