@@ -17,5 +17,13 @@ pipeline {
                 }
             }
         }
+        stage('Pushing to ECR') {
+            steps{  
+                script {
+                    sh 'aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 639771291841.dkr.ecr.eu-west-1.amazonaws.com'
+                    sh 'docker push 639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask:latest'
+                }
+            }
+        }    
     }        
 }
