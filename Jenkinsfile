@@ -2,11 +2,6 @@ pipeline {
     agent any
     
     stages {
-        //stage('Cloning Git') {
-            //steps {
-                //checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/ReiKatz/FlaskAppJenkins.git']]])     
-            //}
-        //}
         stage('Building image') {
             steps{
                 script {
@@ -20,7 +15,8 @@ pipeline {
                 script {
                     def registry = "reikatz/app"
                     sh "docker login -u reikatz -p Aa123456123456"
-                    sh "docker push 'reikatz/app:latest'"
+                    sh "docker tag '${image}':$BUILD_NUMBER reikatz/'${image}':$BUILD_NUMBER"
+                    sh "docker push reikatz/'${image}':$BUILD_NUMBER"
                 }
             }
         }    
