@@ -20,7 +20,7 @@ pipeline {
                 script {
                     def registry = "reikatz/app"
                     sh "docker login -u reikatz -p Aa123456123456"
-                    sh "docker push '${registry}:latest'"
+                    sh "docker push '${registry}:2'"
                 }
             }
         }    
