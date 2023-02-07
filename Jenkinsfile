@@ -2,8 +2,7 @@ pipeline {
     agent { docker { image 'python:3.10.7-alpine' } }
     
     environment {
-        registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkins_repo"
-        repository = "jenkins-repo"
+        registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask"
     }
     stages {
         stage('python versio') {
@@ -19,7 +18,7 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    sh 'docker build -t $registry/$repository:$BUILD_NUMBER .'
+                    dockerImage = docker.build registry
                 }
             }
         }
