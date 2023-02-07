@@ -3,11 +3,23 @@ pipeline {
     
     environment {
         registry = "639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask"
+        AWS_REGION = 'eu-west-1'
+        AWS_ACCESS_KEY_ID = credentials('AKIAZJ5KXGDA6KSLW6XY')
+        AWS_SECRET_ACCESS_KEY = credentials('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')
     }
     stages {
         stage('Cloning Git') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/ReiKatz/FlaskAppJenkins.git']]])     
+            }
+        }
+        stage('Configure AWS CLI') {
+            steps {
+                script {
+                    sh 'aws configure set region $AWS_REGION'
+                    sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
+                    sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
+                }
             }
         }
         stage('Building image') {
