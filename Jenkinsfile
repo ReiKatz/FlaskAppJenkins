@@ -17,18 +17,14 @@ pipeline {
                 }
             }
         }
-        stage('Pushing to ECR') {
-            steps{  
-                script {
-                    withAWS(credentials: "aws-credentials") {
-                        sh 'aws configure set region ${AWS_REGION}'
-                        sh 'aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}'
-                        sh 'aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}'
+        stage('Deploy') {
+            steps {
+                script{
+                        docker.withRegistry('https://639771291841.dkr.ecr.eu-west-1.amazonaws.com', 'ecr:eu-west-1:aws-credentials') {
+                    dockerImage.push("${env.BUILD_NUMBER}")
+                    dockerImage.push("latest")
                     }
-                    sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin 639771291841.dkr.ecr.eu-west-1.amazonaws.com'
-                    sh 'docker push 639771291841.dkr.ecr.eu-west-1.amazonaws.com/jenkinsflask:latest'
                 }
-            }
-        }    
+            }    
     }        
 }
