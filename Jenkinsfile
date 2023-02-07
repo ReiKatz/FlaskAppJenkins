@@ -2,11 +2,11 @@ pipeline {
     agent any
     
     stages {
-        stage('Cloning Git') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/ReiKatz/FlaskAppJenkins.git']]])     
-            }
-        }
+        //stage('Cloning Git') {
+            //steps {
+                //checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/ReiKatz/FlaskAppJenkins.git']]])     
+            //}
+        //}
         stage('Building image') {
             steps{
                 script {
